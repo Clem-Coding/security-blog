@@ -64,10 +64,10 @@ $post->setId(1);
 
 
 
-$comment1 = new Comment("Great post, very informative!", $user1->getId(), $post->getId(), $post);
-$comment2 =  new Comment("I totally agree with this point.", $user2->getId(), $post->getId(), $post);
-$comment3 =    new Comment("Looking forward to more articles!", $user1->getId(), $post->getId(), $post);
-$comment4 = new Comment("Thanks for the tips, very useful.", $user2->getId(), $post->getId(), $post);
+$comment1 = new Comment("Great post, very informative!", $user1, $post);
+$comment2 =  new Comment("I totally agree with this point.", $user2, $post);
+$comment3 =    new Comment("Looking forward to more articles!", $user1, $post);
+$comment4 = new Comment("Thanks for the tips, very useful.", $user2, $post);
 
 
 
@@ -76,7 +76,7 @@ $post->addComment($comment2);
 $post->addComment($comment3);
 $post->addComment($comment4);
 
-// Affichage de l'objet Post avec var_dump
+
 echo "<pre>";
 var_dump("POST", $post);
 echo "</pre>";

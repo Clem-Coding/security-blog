@@ -5,19 +5,19 @@
  * @link : https://github.com/Gaellan
  */
 
-require_once "Post.php";
+
 
 class Comment
-
 {
 
     private ?int $id = null;
     public function __construct(
+
         private string $content,
-        private int $user_id,
-        private int $post_id,
+        private User $user,
         private Post $post
     ) {}
+
 
     public function getId(): ?int
     {
@@ -39,24 +39,14 @@ class Comment
         $this->content = $content;
     }
 
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(int $user_id): void
+    public function setUser(User $user): void
     {
-        $this->user_id = $user_id;
-    }
-
-    public function getPostId(): int
-    {
-        return $this->post_id;
-    }
-
-    public function setPostId(int $post_id): void
-    {
-        $this->post_id = $post_id;
+        $this->user = $user;
     }
 
 
@@ -64,7 +54,6 @@ class Comment
     {
         return $this->post;
     }
-
 
     public function setPost(Post $post): void
     {
