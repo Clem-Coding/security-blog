@@ -10,7 +10,7 @@ class Category
 {
     private ?int $id = null;
 
-    public function __construct(private string $title, private string $description) {}
+    public function __construct(private string $title = '', private string $description = '') {}
 
     public function getId(): ?int
     {

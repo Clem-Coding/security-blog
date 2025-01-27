@@ -25,8 +25,48 @@ Faites en sorte que vos modèles soient conformes à ce qui est présent dans vo
  //  1. Analyser la structure de la BDD et les relations entre les tables. Regarder le concepteur
  //  2. Créer des classes dans models pour chaque table sauf post_categories, les attributs correspondent aux colonnes (+ regarder les types)
  //  3. Mettre des getters et des setters pour chaque attribut
+ //  4. Tester les instances
 
 
 ```
 
 ![schéma du concepteur de la base de données correspondant au projet](concepteur.png)
+
+## Étape 4 : les Managers
+
+Vous allez devoir créer les managers vous permettant de manipuler votre base de données. Attention, vous devez obligatoirement hydrater des instances de classes.
+
+Voici les méthodes minimum que vous devez avoir dans vos Managers :
+CategoryManager
+
+    findAll() qui retourne toutes les catégories
+    findOne(int $id) qui retourne la catégorie qui a l’id passé en paramètre, null si elle n’existe pas
+
+### PostManager
+
+    findLatest() qui retourne les 4 derniers posts
+    findOne(int $id) qui retourne le post qui a l’id passé en paramètre, null si il n’existe pas
+    findByCategory(int $categoryId) qui retourne les posts ayant la catégorie dont l’id est passé en paramètre
+
+### CommentManager
+
+    findByPost(int $postId) qui retourne les commentaires ayant le post dont l’id est passé en paramètre
+    create(Comment $comment) qui insère le commentaire passé en paramètres dans la base de données
+
+### UserManager
+
+    findByEmail(string $email) qui retourne le user qui a l’email passé en paramètre, null si il n’existe pas
+    create(User $user) qui insère l’utilisateur passé en paramètres dans la base de données
+
+
+
+    ```Js
+
+// 1. Créer un fichier .env et autoload Composer, adapter l'AbastractManager
+// 2. Tester la connexion
+// 3. Créer les Managers pour les catégories avec les méthodes données en sécurisant les requêtes grace à la variable $parameters
+// 4. Tester les instances
+
+```
+
+```

@@ -10,8 +10,15 @@ class User
 {
     private ?int $id = null;
 
-    public function __construct(private string $username, private string $email, private string $password, private string $role, private DateTime $createdAt) {}
-
+    // Les paramètres email et password ont maintenant des valeurs par défaut vides (''). 
+    // Si on ne passe pas ces arguments lors de l'instanciation de la classe, PHP utilisera automatiquement ces valeurs.
+    public function __construct(
+        private string $username,
+        private string $email = '',       // Email par défaut vide,
+        private string $password = '',    // Mot de passe par défaut vide
+        private string $role = '',
+        private DateTime $createdAt = new DateTime() // On assigner une valeur par défaut (comme la date/heure actuelle). 
+    ) {}
     public function getId(): ?int
     {
         return $this->id;
