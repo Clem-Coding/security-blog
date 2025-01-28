@@ -77,3 +77,34 @@ Les mots de passe doivent faire 8 caractères au minimum, avec au moins une maju
 Vous allez devoir utiliser une expression régulière pour cela, mon conseil, demandez à ChatGPT (ou toute autre IA) de rédiger cette expression pour vous et de vous l’expliquer. Les expressions régulières sont une syntaxe à part entière d’où ce conseil. Vous avez un bref cours sur les Regex et leu usage en PHP ici : https://elearning.3wa.fr/mod/page/view.php?id=12370.
 
 Les mots de passe doivent être chiffrés avec l’algorithme BCRYPT.
+
+```Js
+
+// 1.Analyser le routeur dans le dossier services et les noms de routes ainsi que leurs méthodes associées
+// 2. Pour s'y retrouver, créer un tableau associatif avec les urls complets et leur méthode
+// ex: index.php?route=home -> home() du BlogConcroller
+// 3.Implémenter le layout avec la logique qui gère les routes en fonction du nom de route passé dans l'URL
+// 4. Rajouter les liens dans les templates et tester que les routes affichent bien le bon template
+// 5.Création des controlleurs et implémenter les méthodes. Point de vigileance sur la sécurité du AuthController
+
+
+// AFFICHAGE:
+
+index.php?route=home   -> home() du BlogController
+index.php?route=register  -> register() du AuthController
+index.php?route=login   -> login() du AuthController
+index.php?route=post  -> post() du BlogController
+index.php?route=category  -> post() du BlogController
+
+// LOGIQUE:
+index.php?route=check-register  -> checkRegister() du AuthController
+index.php?route=check-login  -> CheckLogin() du AuthController
+index.php?route=check-logout  -> logout() du AuthController
+index.php?route=check-comment -> checkComment() du BlogController
+
+
+
+
+
+
+```
