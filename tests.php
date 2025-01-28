@@ -172,49 +172,49 @@ foreach ($latestPosts as $post) {
 echo "</pre>";
 
 
-// Test findOnes()
+// // Test findOnes()
 
-$postById = $postManager->findOne(1);
-echo "<h2>Les post trouvé par son id</h2>";
-echo "<pre>";
-if ($postById) {
-    echo "Id: " . $postById->getId() . "<br>";
-    echo "Title: " . $postById->getTitle() . "<br>";
-    echo "Excerpt: " . $postById->getExcerpt() . "<br>";
-    // echo "Content: " . $postById->getContent() . "<br>";
-    echo "Author: " . $postById->getAuthor()->getUsername() . "<br>";
-    echo "Created At: " . $postById->getCreatedAt()->format('Y-m-d H:i:s') . "<br>";
-    echo "Category: " . $postById->getCategory()->getTitle() . "<br>";
+// $postById = $postManager->findOne(1);
+// echo "<h2>Les post trouvé par son id</h2>";
+// echo "<pre>";
+// if ($postById) {
+//     echo "Id: " . $postById->getId() . "<br>";
+//     echo "Title: " . $postById->getTitle() . "<br>";
+//     echo "Excerpt: " . $postById->getExcerpt() . "<br>";
+//     // echo "Content: " . $postById->getContent() . "<br>";
+//     echo "Author: " . $postById->getAuthor()->getUsername() . "<br>";
+//     echo "Created At: " . $postById->getCreatedAt()->format('Y-m-d H:i:s') . "<br>";
+//     echo "Category: " . $postById->getCategory()->getTitle() . "<br>";
 
-    echo "<hr>";
-} else {
-    echo "Aucun post trouvé avec cet ID.";
-}
+//     echo "<hr>";
+// } else {
+//     echo "Aucun post trouvé avec cet ID.";
+// }
 
-echo "</pre>";
-
-
-//findByCategory(int $categoryId)
-
-$postsByCategory = $postManager->findByCategory(1);
-echo "<h2>Les posts trouvés par son Id de catégorie</h2>";
-echo "<pre>";
-
-if ($postsByCategory) {
-    foreach ($postsByCategory as $post) {
-        echo "Title: " . $post->getTitle() . "<br>";
-        echo "Excerpt: " . $post->getExcerpt() . "<br>";
-        // echo "Content: " . $post->getContent() . "<br>";
-        echo "Author: " . $post->getAuthor()->getUsername() . "<br>";
-        echo "Created At: " . $post->getCreatedAt()->format('Y-m-d H:i:s') . "<br>";
-        echo "Category: " . $post->getCategory()->getTitle() . "<br>";
-
-        echo "<hr>";
-    }
-} else {
-    echo "Aucun post trouvé avec cet Id";
-}
+// echo "</pre>";
 
 
+// //findByCategory(int $categoryId)
 
-echo "</pre>";
+// $postsByCategory = $postManager->findByCategory(1);
+// echo "<h2>Les posts trouvés par son Id de catégorie</h2>";
+// echo "<pre>";
+
+// if ($postsByCategory) {
+//     foreach ($postsByCategory as $post) {
+//         echo "Title: " . $post->getTitle() . "<br>";
+//         echo "Excerpt: " . $post->getExcerpt() . "<br>";
+//         // echo "Content: " . $post->getContent() . "<br>";
+//         echo "Author: " . $post->getAuthor()->getUsername() . "<br>";
+//         echo "Created At: " . $post->getCreatedAt()->format('Y-m-d H:i:s') . "<br>";
+//         echo "Category: " . $post->getCategory()->getTitle() . "<br>";
+
+//         echo "<hr>";
+//     }
+// } else {
+//     echo "Aucun post trouvé avec cet Id";
+// }
+
+
+
+// echo "</pre>";
