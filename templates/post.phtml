@@ -1,0 +1,41 @@
+<article class="container mt-5">
+
+    <header>
+        <h1 class="display-4"><?= htmlspecialchars($data['post']->getTitle()); ?></h1>
+    </header>
+
+
+    <section>
+        <p><?= htmlspecialchars($data['post']->getContent()); ?></p>
+    </section>
+
+
+    <footer class="mt-4">
+        <p class="text-muted">
+            <small>
+                Publié par <?= htmlspecialchars($data['post']->getAuthor()->getUsername()); ?> le <?= htmlspecialchars($data['post']->getCreatedAt()->format('d M Y')); ?>
+            </small>
+        </p>
+    </footer>
+
+
+</article>
+
+<section>
+
+
+    <h2>Commentaires</h2>
+    <?php if (!empty($data['comments'])): ?>
+        <ul>
+            <?php foreach ($data['comments'] as $comment): ?>
+                <li>
+                    <!-- <strong><?= ($comment->getAuthor()->getUsername()); ?> :</strong> -->
+                    <p><?= nl2br($comment->getContent()); ?></p>
+                    <p>coucou</p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Aucun commentaire pour cet article.</p>
+    <?php endif; ?>
+</section>
