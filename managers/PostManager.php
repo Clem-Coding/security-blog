@@ -28,8 +28,8 @@ class PostManager extends AbstractManager
         $posts = [];
 
         // On instance les managers respectifs de User et Category afin de pouvoir utiliser leurs méthodes
-        $userManager = new UserManager($this->db);
-        $categoryManager = new CategoryManager($this->db);
+        $userManager = new UserManager();
+        $categoryManager = new CategoryManager();
 
         foreach ($results as $result) {
             //on récupère les informations du user et de la catégorie correpondant au post en passant l'id récupéré de la BDD en paramètres
@@ -77,8 +77,8 @@ class PostManager extends AbstractManager
         }
 
 
-        $userManager = new UserManager($this->db);
-        $categoryManager = new CategoryManager($this->db);
+        $userManager = new UserManager();
+        $categoryManager = new CategoryManager();
 
         $user = $userManager->findOne($result['author_id']);
         $category = $categoryManager->findOne($result['category_id']);
@@ -118,8 +118,8 @@ class PostManager extends AbstractManager
 
 
 
-        $userManager = new UserManager($this->db);
-        $categoryManager = new CategoryManager($this->db);
+        $userManager = new UserManager();
+        $categoryManager = new CategoryManager();
 
         foreach ($results as $result) {
 

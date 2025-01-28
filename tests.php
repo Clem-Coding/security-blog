@@ -41,7 +41,7 @@ $user2 = new User(
     "jane_smith",
     "jane.smith@example.com",
     "mypassword456",
-    "editor",
+    "user",
     new DateTime("2023-05-15 09:30:00")
 );
 
@@ -75,7 +75,7 @@ $post = new Post(
     $category
 );
 
-$post->setId(1);
+$post->setId(4);
 
 
 
@@ -107,9 +107,9 @@ echo "</pre>";
 //TEST AJOUTER UN UTILISATEUR
 
 // $userManager = new UserManager();
-// $userManager->create($user1);
+// $userManager->create($user2);
 // echo "<pre>";
-// var_dump("UTLISATEUR AJOUTE", $user1);
+// var_dump("UTLISATEUR AJOUTE", $user2);
 // echo "</pre>";
 
 //TEST USer findOne()
@@ -217,4 +217,38 @@ if ($postsByCategory) {
 
 
 
+echo "</pre>";
+
+
+
+// TEST COMMENTS
+
+// findByPost(int $postId)
+
+$commentManager = new CommentManager();
+$commentsByPost = $commentManager->findByPost(1);
+echo "<h2>Les commentaires trouvés par son Id de Post</h2>";
+echo "<pre>";
+
+if ($commentsByPost) {
+    foreach ($commentsByPost as $comment) {
+        echo "Comment: " . $comment->getContent() . "<br>";
+        // echo "Excerpt: " . $comment->getExcerpt() . "<br>";
+        // // echo "Content: " . $comment->getContent() . "<br>";
+        // echo "Author: " . $comment->getAuthor()->getUsername() . "<br>";
+        // echo "Created At: " . $comment->getCreatedAt()->format('Y-m-d H:i:s') . "<br>";
+        // echo "Category: " . $comment->getCategory()->getTitle() . "<br>";
+
+        echo "<hr>";
+    }
+} else {
+    echo "Aucun commentaire trouvé avec cet Id";
+}
+
+
+// test create(Comment $comment)
+//variable comment1 -> voir plus haut
+$commentManager->create($comment4);
+echo "<pre>";
+var_dump("commentaire ajouté", $comment4->getContent());
 echo "</pre>";
