@@ -39,7 +39,8 @@ class PostManager extends AbstractManager
         // MON TABLEAU DE $results A PRIORI retourné (avec exemples fictifs)
         // [
         //     'id' => 10,                     
-        //     'title' => 'Titre du post',     
+        //     'title' => 'Titre du post',  
+        //     'excerpt' => 'blablabla'    
         //     'created_at' => '2023-01-15',  
         //     'author' => 1,                 
         //     'username' => 'Auteur1',       
@@ -49,14 +50,13 @@ class PostManager extends AbstractManager
 
         $posts = [];
         foreach ($results as $result) {
+
             // On instancie un nouvel utilisateur avec : username, 
-
-
             // on a besoin que du username à priori pour le post, on peut instancier qu'un seul attribut du fait qu'on a intialisé
             //les autres attributs dans le constructeur de User avec une string vide
             $user = new User($result['username']);
 
-            // But : Attribuer un ID unique à l'objet User (qui correspond à l'auteur du post récupéré).
+            // Attribuer un ID unique à l'objet User (qui correspond à l'auteur du post récupéré).
             $user->setId($result['author']);
 
             //idem pour category, on a besoin que du titre

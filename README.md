@@ -58,9 +58,7 @@ CategoryManager
     findByEmail(string $email) qui retourne le user qui a l’email passé en paramètre, null si il n’existe pas
     create(User $user) qui insère l’utilisateur passé en paramètres dans la base de données
 
-
-
-    ```Js
+```Js
 
 // 1. Créer un fichier .env et autoload Composer, adapter l'AbastractManager
 // 2. Tester la connexion
@@ -69,4 +67,13 @@ CategoryManager
 
 ```
 
-```
+## Étape 5 : les Controllers
+
+Vous allez devoir utiliser vos controllers pour afficher le contenu de vos pages et gérer la soumission de vos formulaires. Attention, vous devez gérer la faille CSRF et la faille XSS pour toute information soumise par l’utilisateur.
+Sécurité
+
+Les mots de passe doivent faire 8 caractères au minimum, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial.
+
+Vous allez devoir utiliser une expression régulière pour cela, mon conseil, demandez à ChatGPT (ou toute autre IA) de rédiger cette expression pour vous et de vous l’expliquer. Les expressions régulières sont une syntaxe à part entière d’où ce conseil. Vous avez un bref cours sur les Regex et leu usage en PHP ici : https://elearning.3wa.fr/mod/page/view.php?id=12370.
+
+Les mots de passe doivent être chiffrés avec l’algorithme BCRYPT.
