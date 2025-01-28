@@ -14,7 +14,7 @@ class PostManager extends AbstractManager
 
 
         //Requête avec jointure pour récupérer l'id de la catégorie correpondant au post
-        $query = 'SELECT posts.*, categories.id AS category_id
+        $query = 'SELECT posts.*, author AS author_id, categories.id AS category_id
           FROM posts
           JOIN posts_categories ON posts.id = posts_categories.post_id
           JOIN categories ON posts_categories.category_id = categories.id
@@ -33,7 +33,7 @@ class PostManager extends AbstractManager
 
         foreach ($results as $result) {
             //on récupère les informations du user et de la catégorie correpondant au post en passant l'id récupéré de la BDD en paramètres
-            $user = $userManager->findOne($result['author']);
+            $user = $userManager->findOne($result['author_id']);
             $category = $categoryManager->findOne($result['category_id']);
 
             // On créer un nouveau post avec toutes les infos récupérées
@@ -59,7 +59,7 @@ class PostManager extends AbstractManager
     //  findOne(int $id) qui retourne le post qui a l’id passé en paramètre, null si il n’existe pas
     public function findOne(int $id): ?Post
     {
-        $query = 'SELECT  posts.*,  categories.id AS category_id
+        $query = 'SELECT posts.*, author AS author_id, categories.id AS category_id
           FROM posts
           JOIN posts_categories ON posts.id = posts_categories.post_id
           JOIN categories ON posts_categories.category_id = categories.id
@@ -80,7 +80,7 @@ class PostManager extends AbstractManager
         $userManager = new UserManager($this->db);
         $categoryManager = new CategoryManager($this->db);
 
-        $user = $userManager->findOne($result['author']);
+        $user = $userManager->findOne($result['author_id']);
         $category = $categoryManager->findOne($result['category_id']);
 
         $post = new Post(
@@ -102,7 +102,7 @@ class PostManager extends AbstractManager
     public function findByCategory(int $categoryId): array
     {
 
-        $query = 'SELECT posts.*, categories.id AS category_id
+        $query = 'SELECT posts.*, author AS author_id, categories.id AS category_id
                 FROM posts
                 JOIN posts_categories ON posts.id = posts_categories.post_id
                 JOIN categories ON posts_categories.category_id = categories.id
@@ -123,7 +123,7 @@ class PostManager extends AbstractManager
 
         foreach ($results as $result) {
 
-            $user = $userManager->findOne($result['author']);
+            $user = $userManager->findOne($result['author_id']);
             $category = $categoryManager->findOne($result['category_id']);
 
 
