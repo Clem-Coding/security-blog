@@ -72,7 +72,7 @@ class AuthController extends AbstractController
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirm-password'];
-        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $hash = password_hash($password, PASSWORD_BCRYPT); // chiffré avec l'algorithme BCRYPT
         $safeUsername = htmlspecialchars($username);
         $safeEmail = htmlspecialchars($email);
 
