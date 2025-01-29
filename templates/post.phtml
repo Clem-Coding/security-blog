@@ -1,19 +1,19 @@
 <article class="container mt-5">
 
     <header>
-        <h1 class="display-4"><?= htmlspecialchars($data['post']->getTitle()); ?></h1>
+        <h1 class="display-4"><?= ($data['post']->getTitle()); ?></h1>
     </header>
 
 
     <section>
-        <p><?= htmlspecialchars($data['post']->getContent()); ?></p>
+        <p><?= ($data['post']->getContent()); ?></p>
     </section>
 
 
     <footer class="mt-4">
         <p class="text-muted">
             <small>
-                Publié par <?= htmlspecialchars($data['post']->getAuthor()->getUsername()); ?> le <?= htmlspecialchars($data['post']->getCreatedAt()->format('d M Y')); ?>
+                Publié par <?= ($data['post']->getAuthor()->getUsername()); ?> le <?= ($data['post']->getCreatedAt()->format('d M Y')); ?>
             </small>
         </p>
     </footer>
@@ -21,20 +21,18 @@
 
 </article>
 
-<section>
-
-
+<section class="container mt-5">
     <h2>Commentaires</h2>
     <?php if (!empty($data['comments'])): ?>
-        <ul>
+        <div class="list-group">
             <?php foreach ($data['comments'] as $comment): ?>
-                <li>
-                    <!-- <strong><?= ($comment->getAuthor()->getUsername()); ?> :</strong> -->
-                    <p><?= nl2br($comment->getContent()); ?></p>
-                    <p>coucou</p>
-                </li>
+                <div class="list-group-item">
+
+                    <p class="mb-1"><?= ($comment->getContent()); ?></p>
+
+                </div>
             <?php endforeach; ?>
-        </ul>
+        </div>
     <?php else: ?>
         <p>Aucun commentaire pour cet article.</p>
     <?php endif; ?>
