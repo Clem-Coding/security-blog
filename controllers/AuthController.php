@@ -22,6 +22,18 @@ class AuthController extends AbstractController
     public function checkLogin(): void
     {
 
+        //VERIF du CSRF
+
+        if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $_SESSION['csrf_token']) {
+            $_SESSION['error_message'] = 'Token CSRF invalide ou manquant.';
+            $this->redirect('index.php?route=login');
+            return;
+        }
+
+        // Suppression du token CSRF de la session après vérification
+        unset($_SESSION['csrf_token']);
+
+
 
         if (isset($_POST["email"], $_POST["password"])) {
             $email = $_POST["email"];
@@ -47,25 +59,26 @@ class AuthController extends AbstractController
 
     public function register(): void
     {
-        $csrfManager = new CSRFTokenManager();
-        $csrfToken = $csrfManager->generateCSRFToken();
-        $_SESSION['csrf_token'] = $csrfToken;
-        $this->render("register", ["csrf_token" => $csrfToken]);
+
+        if (!isset($_SESSION['csrf_token'])) {
+            $csrfTokenManager = new CSRFTokenManager();
+            $_SESSION['csrf_token'] = $csrfTokenManager->generateCSRFToken();
+        }
+
+        $this->render("register", ['csrf_token' => $_SESSION['csrf_token']]);
     }
 
     public function checkRegister(): void
     {
 
-
-        // Vérification du token CSRF
-        if (!isset($_POST['csrf-token']) || !isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf-token'])) {
-            // Token CSRF invalide ou absent
+        // Vérifier la présence du token CSRF dans la requête
+        if (!isset($_SESSION['csrf_token'])) {
+            // Token CSRF manquant
+            $_SESSION['error_message'] = 'Token CSRF manquant.';
             $this->redirect("index.php?route=register");
             return;
         }
 
-        // Suppression du token CSRF de la session après vérification
-        unset($_SESSION['csrf_token']);
 
 
         $username = $_POST['username'];
