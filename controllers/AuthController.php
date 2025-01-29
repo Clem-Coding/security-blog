@@ -21,12 +21,29 @@ class AuthController extends AbstractController
 
     public function checkLogin(): void
     {
-        // si le login est valide => connecter puis rediriger vers la home
-        // $this->redirect("index.php");
 
-        // sinon rediriger vers login
-        // $this->redirect("index.php?route=login");
+
+        if (isset($_POST["email"], $_POST["password"])) {
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+
+            $userManager = new UserManager();
+            $user = $userManager->findByEmail($email);
+
+            if ($user !== null) {
+                $passwordIsValid = password_verify($password, $user->getPassword());
+                if ($passwordIsValid) {
+                    $_SESSION["user"] = ["username" => $user->getUsername()];
+                    $this->redirect("index.php");
+                    return;
+                }
+            }
+
+            $_SESSION['error_message'] = 'Cet identifiant ou mot de passe est invalide, réessayez ou cliquez sur "mot de passe oublié';
+            $this->redirect("index.php?route=login");
+        }
     }
+
 
     public function register(): void
     {
@@ -55,8 +72,24 @@ class AuthController extends AbstractController
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirm-password'];
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $safeUsername = htmlspecialchars($username);
+        $safeEmail = htmlspecialchars($email);
 
+        //LES VERIFICATIONS
+
+        //Les champs sont-ils remplis?
         if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
+            $this->redirect("index.php?route=register");
+            return;
+        }
+
+        // Est-ce que le mot de passe est assez fort?
+        $passwordPattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#?!@$%^&*-]).{8,}$/";
+
+        if (!preg_match($passwordPattern, $password)) {
+            $_SESSION['error_message'] = "Le mot de passe doit contenir au moins 8 caractères, incluant une lettre majuscule, 
+            une lettre minuscule, un chiffre et un caractère spécial.";
             $this->redirect("index.php?route=register");
             return;
         }
@@ -65,10 +98,18 @@ class AuthController extends AbstractController
             $this->redirect("index.php?route=register");
             return;
         }
-        //d'autres verifs à prévoir, revoir expo passé sur le sujet
+
+        // Est-ce que l'utilisateur existe?
+        $userManager = new UserManager();
+        if ($userManager->userExists($username, $email)) {
+            $_SESSION['error_message'] = "Le nom d'utilisateur ou l'adresse e-mail est déjà utilisé.";
+            $this->redirect("index.php?route=register");
+            return;
+        }
+
 
         //Si tout est ok, on insère le nouveau user dans la BDD
-        $user = new User($username, $email, $password);
+        $user = new User($safeUsername, $safeEmail, $hash);
         $userManager = new UserManager();
         $userManager->create($user);
 

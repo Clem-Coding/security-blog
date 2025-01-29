@@ -61,9 +61,9 @@ class UserManager extends AbstractManager
 
 
         $parameters = [
-            'username' => htmlspecialchars($user->getUsername()), //securité
-            'email' => htmlspecialchars($user->getEmail()), //securité
-            'password' => password_hash($user->getPassword(), PASSWORD_BCRYPT), // securité
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPassword(),
             'role' => $user->getRole(),
             'created_At' => $user->getCreatedAt()->format('Y-m-d H:i:s'),
 
@@ -71,5 +71,16 @@ class UserManager extends AbstractManager
 
         $query->execute($parameters);
         $user->setId($this->db->lastInsertId());
+    }
+
+
+    public function userExists(string $username, string $email): bool
+    {
+        $query = $this->db->prepare('SELECT COUNT(*) FROM users WHERE username = :username OR email = :email');
+        $query->execute([
+            'username' => $username,
+            'email' => $email
+        ]);
+        return $query->fetchColumn() > 0;
     }
 }

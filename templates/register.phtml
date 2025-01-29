@@ -35,4 +35,11 @@
     <button type="submit" class="btn btn-primary">Register</button>
 </fieldset>
 </form>
+
+<?php if (isset($_SESSION['error_message'])) {
+    echo '<p class="error">' . $_SESSION['error_message'] . '</p>';
+    unset($_SESSION['error_message']);
+}
+
+?>
 </main>
